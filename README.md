@@ -1,40 +1,29 @@
-# FunRetro.io export
+# FunRetro io solution by Gabriel Pereira
 
-[![License][license-badge]][license-url]
+What I have changed:
 
-> CLI tool to easily export [FunRetro.io](https://funretro.io/) retrospective boards using Playwright
+## Project structure
 
-## Installing / Getting started
+Updated the project structure to:
 
-It's required to have [npm](https://www.npmjs.com/get-npm) installed locally to follow the instructions.
+--exported \
+-- src/ \
+---- index.js \
+---- utils/ \
+------ helpers.js
 
-```shell
-git clone https://github.com/julykaz/funretro-export.git
-cd funretro-export
-npm install
-npm start -- "http://funretro.io/board..." "../exported-file.txt"
-```
+The `exported` folder is the default output of exported files.
+The `src` folder is where the main code is located.
+The `utils` folder holds the helper functions file
 
-## Issues
+## Format for third argument
 
-If you encounter the following error
-```
-Error: browserType.launch: Browser is not supported on current platform
-Note: use DEBUG=pw:api environment variable and rerun to capture Playwright logs.
-```
-then execute this command:
-```
-PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true npm i -D playwright
-```
+Added the `format` as third argument of the execution scriot. The `format` argument currently accepts: `csv` (default), `pdf`, and `txt`.
 
-## TODO
+## Code splitting
 
-- Export card comments
-- More export options (PDF, CSV)
+Also, one last modification from the original source code was the code splitting. I've created a `helpers.js` file to concentrate all helper functions, the only code that stayed in the `index.js` is the code related to the `run()` method. It could even be better organized, segregating the `get` methods in one file and other files for each purposes.
 
-## Licensing
+## RunCSV algorithm
 
-MIT License
-
-[license-badge]: https://img.shields.io/github/license/robertoachar/docker-express-mongodb.svg
-[license-url]: https://opensource.org/licenses/MIT
+For the `runCSV()` function, I've created an algorithm that doesn't require more loops then the original ones (n²). This was not the most easy to ready alternative, but I focused in the performance of this algorithm.
